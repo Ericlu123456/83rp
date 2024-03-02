@@ -1,2 +1,2 @@
-# 73rp-Cloudflare
-this is the same project as https://github.com/Ericlu123456/73rp
+# 83rp-Cloudflare
+This is the website of YongChang Private School G8C3.Web link:83rp.pages.dev
