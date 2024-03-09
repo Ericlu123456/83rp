@@ -104,7 +104,40 @@
       </symbol>
     </svg>
 
-
+    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+              id="bd-theme"
+              type="button"
+              aria-expanded="false"
+              data-bs-toggle="dropdown"
+              aria-label="Toggle theme (auto)">
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
+        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+            <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+            Light
+            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+            <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+            Dark
+            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+            <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>
+            Auto
+            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+          </button>
+        </li>
+      </ul>
+    </div>
 
     
 <main>
@@ -124,7 +157,9 @@
           <li class="nav-item">
             <a href="https://83rp.pages.dev/menu.html" class="nav-link active" aria-current="page" href="#">目录</a>
           </li>
-
+          <li class="nav-item">
+            <a href="https://join.skype.com/tgtu7YiAh7Vx" class="nav-link active" aria-current="page" href="#">自由八三同学群</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -169,6 +204,21 @@
         <p class="lead">我们在保证能过审核的前提下保留了极高的言论自由度，且我们的网站使用了先进的技术，外观极佳，并能插入音频、视频。</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container my-5">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+      <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+        <h1 class="display-4 fw-bold lh-1 text-body-emphasis">宇宙免责声明</h1>
+        <p class="lead">请审核高抬贵手</p>
+      </div>
+      <div>
+        <video width="640" height="360" controls>
+          <source src="duty_free_announce.mp4" type="video/mp4">
+        您的浏览器不支持Video标签。
+        </video>
       </div>
     </div>
   </div>
