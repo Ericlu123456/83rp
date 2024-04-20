@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [['$','$'], ['\\(','\\)']]}});</script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS": {"availableFonts":["TeX"],"scale": 150}});</script>
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="%E7%AC%AC%E4%BA%8C%E6%9C%9F%EF%BC%882024420%E5%88%8A%EF%BC%89">第二期（2024/4/20刊）</h1>
+<h2 id="%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9A%E5%90%AC%E6%AD%8C%E5%A1%AB%E8%AF%8D%E8%A7%A3%E6%9E%90">第一部分：听歌填词解析</h2>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&amp;id=435278010&amp;auto=0&amp;height=66"></iframe>
+<p><strong>标题：world.execute(me);</strong></p>
+<p>c++语句，world是变量名，execute是方法，me是参数</p>
+<p>翻译为人类语句是let world execute me;</p>
+<p>execute n. 处死；执行，实施；解决方案。此处为处死的意思（记住这一点，后面会考哈</p>
+<p><strong>Switch on the power line</strong></p>
+<p>switch on=turn on打开（此处解释为接上）</p>
+<p>power line n.电源</p>
+<p><strong>Remember to put on protection</strong></p>
+<p>rember to do 记得要做 remenber doing 记得做过</p>
+<p>put on 穿上 put off=delay put up 张贴</p>
+<p>protection n.防护</p>
+<p><strong>Lay down your pieces</strong></p>
+<p>lay down 放下</p>
+<p>pieces n.棋子(积累下，作文里可以用到)</p>
+<p><strong>And let's begin object creation</strong></p>
+<p>object n.对象</p>
+<p><strong>Fill in my data parameters</strong></p>
+<p>fill in填入</p>
+<p>parameters n.参数(了解即可，不会考)</p>
+<p><strong>INITIALIZATION</strong></p>
+<p>initial adj.最初的
+initialize v.初始化
+initialization n.初始化（外刊可能会考，了解即可）</p>
+<p><strong>Set up our new world</strong></p>
+<p>set up 建立</p>
+<p>（贺老师音）<em>你看，是不是刚讲过</em></p>
+<p><strong>And let's begin the SIMULATION</strong></p>
+<p>simulate v.模拟 simulation n.模拟（作文可以用）</p>
+<p><strong>If I'm a set of points then I will give you my dimension</strong></p>
+<p><strong>If I'm a circle then I will give you my circumference</strong></p>
+<p>这两句都是条件状语从句哈，很好理解(后面还有一堆，使用了排比的修辞手法......)</p>
+<p>dimension n.维度 2D/3D中的D就是dimension缩写</p>
+<p>circumference n.圆周（了解即可，太难拼了）</p>
+<p><strong>If I'm a sine wave Then you can sit on all my TANGENTS</strong></p>
+<p>sine wave指形如y=ksin(x)+b的函数图像</p>
+<p>tangent n.切线，不是指三件函数中的tan()</p>
+<p><strong>If I approach infinity Then you can be my LIMITATIONS</strong></p>
+<p>approach v.接近 n.方法（注意有两个词性，一词多义）</p>
+<p>infinity n.无限</p>
+<p><strong>Switch my current To AC to DC</strong></p>
+<p>switch sth. to sth. 将...切换到...</p>
+<p><strong>And then blind my vision so dizzy so dizzy</strong></p>
+<p>vision n.视角（作文可以用）</p>
+<p>blind v.使失明（注意多词性）</p>
+<p><strong>Oh we can travel To A.D to B.C</strong></p>
+<p><strong>And we can unite So deeply so deeply</strong></p>
+<p>unite v.结合</p>
+<p>United Nations 联合国</p>
+<p><strong>If I can give you all the STIMULATIONS Then I can be your only SATISFACTION</strong></p>
+<p>stimulation n.刺激</p>
+<p>satisfaction n.满意（大概没人不会了吧）</p>
+<p><strong>If I can make you happy I will run the EXECUTION</strong></p>
+<p>此处execution指的是应用</p>
+<p>.exe(executable file)</p>
+<p><strong>Though we are trapped In this strange strange SIMULATION</strong></p>
+<p>be traped in 被困在</p>
+<p><strong>If I'm an eggplant Then I will give you my NUTRIENTS</strong></p>
+<p>nutrient n.营养(健康饮食类作文可以用)</p>
+<p><strong>If I'm a tomato Then I will give you ANTIOXIDANTS</strong></p>
+<p>antioxidants n.抗氧化物（这个考试考了出卷人怕不是4m了）</p>
+<p><strong>If I'm a tabby cat Then I will purr for your ENJOYMENT</strong></p>
+<p>复习enjoy同义转换，不会的出来挨打，这周刚讲过</p>
+<p>pleasant=enjoyable</p>
+<p><strong>If I'm the only god Then you're the proof of my EXISTENCE</strong></p>
+<p>proof n.证明</p>
+<p>existence n.存在</p>
+<p><strong>Switch my gender To F to M</strong></p>
+<p>gender n.性别</p>
+<p><strong>And then do whatever From AM to PM</strong></p>
+<p>whatever pron.无论什么</p>
+<p><strong>Oh switch my role To S to M</strong></p>
+<p>role n.角色</p>
+<p><strong>So we can enter The trance the trance</strong></p>
+<p>enter v.进入（七年级词汇了）</p>
+<p><strong>If I can feel your VIBRATIONS Then I can finally be COMPLETION</strong></p>
+<p>viberation n. 震动
+completion n.完整(的版本)</p>
+<p><strong>Though You have left me in ISOLATION</strong></p>
+<p>现在完成时（过去left，对现在影响在下文）</p>
+<p>isolation n.孤独 上一次见到他是“Isolation is not good for me”</p>
+<p><strong>If I can erase all the pointless FRAGMENTS Then maybe you won't leave me so DISHEARTENED</strong></p>
+<p>pointless=meaningless adj.无意义的</p>
+<p>fragment n.碎片</p>
+<p>disheartened=disappointed adj.沮丧的(作文里可以用，很高级)</p>
+<p><strong>Challenging your god</strong></p>
+<p>challenge sb. 挑战某人</p>
+<p><strong>You have made some ILLEGAL ARGUMENTS</strong></p>
+<p>arguement n.争吵，参数（一词多义，做外刊要知道）</p>
+<p>illegal arguements n.非法参数</p>
+<p>如在cmd中执行dc C:/User/ 就会提示illegal arguements <em>你cd打反了</em></p>
+<p><strong>EXECUTION*N</strong></p>
+<p>一个执行，一个死刑，依此类推</p>
+<p><strong>EIN一（德语）DOS二（西班牙语）TROIS三（法语）NE四（韩语）FEM（瑞典语）LIU六（汉语）</strong></p>
+<p><strong>EXECUTION</strong></p>
+<p>死刑</p>
+<p><strong>If I can give them all the EXECUTION Then I can be your only EXECUTION</strong></p>
+<p>第一个execution是死刑，第二个是解决方案</p>
+<p><strong>If I can have you back I will run the EXECUTION Though we are trapped</strong></p>
+<p>execution 应用</p>
+<p><strong>I've studied how to properly LO-O-OVE</strong></p>
+<p><strong>Question me I can answer all LO-O-OVE</strong></p>
+<p>Level Of ViolencE <em>有端联想</em></p>
+<p><strong>I know the algebraic expression of LO-O-OVE</strong></p>
+<p>algebraic adj.数学的</p>
+<p>expression n.表示；表情；措辞；表达式（示意很多）</p>
+<p><strong>Though you are free I am trapped in LO-O-OVE</strong></p>
+<p><strong>EXECUTION</strong></p>
+
+</body>
+</html>
